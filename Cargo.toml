@@ -4,3 +4,6 @@ version = "0.1.0"
 authors = ["Max Jacobson <max@hardscrabble.net>"]
 
 [dependencies]
+diesel = { version = "1.0.0", features = ["sqlite"] }
+diesel_migrations = "1.1.0"
+xdg = "^2.1"
