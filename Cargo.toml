@@ -2,6 +2,10 @@
 name = "til"
 version = "0.1.0"
 authors = ["Max Jacobson <max@hardscrabble.net>"]
+description = "CLI for storing TILs (today I learneds)"
+license = "MIT"
+homepage = "https://github.com/maxjacobson/til"
+repository = "https://github.com/maxjacobson/til"
 
 [dependencies]
 diesel = { version = "1.0.0", features = ["sqlite"] }
