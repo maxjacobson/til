@@ -14,7 +14,7 @@ pub mod schema;
 pub mod models;
 
 use schema::tils;
-use models::NewTIL;
+use models::{NewTIL, TIL};
 
 embed_migrations!();
 
@@ -44,8 +44,26 @@ fn main() {
             } else {
                 println!("Don't forget to provide contents for your new til");
             }
+        } else if cmd == "list" {
+            {
+                use schema::tils::dsl::*;
+
+                let results = tils.order(created_at.desc())
+                    .load::<TIL>(&connection)
+                    .unwrap();
+
+                let len = results.len();
+
+                for til in results {
+                    println!("{} - {}", til.created_at, til.contents);
+                }
+
+                if len == 0 {
+                    println!("None yet. Why not create one?");
+                }
+            }
         } else {
-            println!("Only subcommand currently is \"new\"");
+            println!("Only subcommands currently are \"new\" and \"list\"");
         }
     } else {
         println!("Don't forget to provide a command. Usage: `til new 'Rust is cool'`");

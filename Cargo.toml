@@ -8,6 +8,7 @@ homepage = "https://github.com/maxjacobson/til"
 repository = "https://github.com/maxjacobson/til"
 
 [dependencies]
-diesel = { version = "1.0.0", features = ["sqlite"] }
+diesel = { version = "1.0.0", features = ["sqlite", "chrono"] }
 diesel_migrations = "1.1.0"
 xdg = "^2.1"
+chrono = "0.4"
