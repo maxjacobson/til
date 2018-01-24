@@ -32,9 +32,7 @@ fn main() {
             if let Some(contents) = args.nth(0) {
                 println!("Going to insert {} til", contents);
 
-                let new_til = NewTIL {
-                    contents: &contents,
-                };
+                let new_til = NewTIL { contents: &contents };
 
                 diesel::insert_into(tils::table)
                     .values(&new_til)
