@@ -23,7 +23,9 @@ fn main() {
     let data_file = xdg_dirs.place_data_file("data.sqlite3").unwrap();
     let data_file_str = data_file.to_str().unwrap();
     let connection = SqliteConnection::establish(&data_file_str).unwrap();
-    embedded_migrations::run(&connection).unwrap();
+
+    // TODO: log this to a file instead of stdout
+    embedded_migrations::run_with_output(&connection, &mut std::io::stdout()).unwrap();
 
     let mut args = env::args();
 
