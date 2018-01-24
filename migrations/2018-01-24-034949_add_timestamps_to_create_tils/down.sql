@@ -1,4 +1,4 @@
--- there's no drop table, but we can
+-- there's no drop column, but we can
 -- juggle the data around to simulate one
 
 create table tmp_tils (
