@@ -10,6 +10,12 @@ use diesel::prelude::*;
 
 use std::env;
 
+pub mod schema;
+pub mod models;
+
+use schema::tils;
+use models::NewTIL;
+
 embed_migrations!();
 
 fn main() {
@@ -25,6 +31,15 @@ fn main() {
         if cmd == "new" {
             if let Some(contents) = args.nth(0) {
                 println!("Going to insert {} til", contents);
+
+                let new_til = NewTIL {
+                    contents: &contents,
+                };
+
+                diesel::insert_into(tils::table)
+                    .values(&new_til)
+                    .execute(&connection)
+                    .unwrap();
             } else {
                 println!("Don't forget to provide contents");
             }
