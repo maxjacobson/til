@@ -30,7 +30,6 @@ fn main() {
     if let Some(cmd) = args.nth(1) {
         if cmd == "new" {
             if let Some(contents) = args.nth(0) {
-                println!("Going to insert {} til", contents);
 
                 let new_til = NewTIL { contents: &contents };
 
@@ -38,13 +37,15 @@ fn main() {
                     .values(&new_til)
                     .execute(&connection)
                     .unwrap();
+
+                println!("Inserted new til: {:?}", contents);
             } else {
-                println!("Don't forget to provide contents");
+                println!("Don't forget to provide contents for your new til");
             }
         } else {
-            println!("Only cmd currently is \"new\"");
+            println!("Only subcommand currently is \"new\"");
         }
     } else {
-        println!("Don't forget to provide a command");
+        println!("Don't forget to provide a command. Usage: `til new 'Rust is cool'`");
     }
 }
