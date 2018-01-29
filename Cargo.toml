@@ -1,6 +1,6 @@
 [package]
 name = "til"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Max Jacobson <max@hardscrabble.net>"]
 description = "CLI for storing TILs (today I learneds)"
 license = "MIT"
