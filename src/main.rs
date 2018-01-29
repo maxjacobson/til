@@ -19,9 +19,16 @@ use models::{NewTIL, TIL};
 embed_migrations!();
 
 fn main() {
-    let xdg_dirs = xdg::BaseDirectories::with_prefix("til").unwrap();
-    let data_file = xdg_dirs.place_data_file("data.sqlite3").unwrap();
-    let data_file_str = data_file.to_str().unwrap();
+    let data_file_path_buf = match env::var("TIL_FILE") {
+        Ok(non_default_path) => std::path::PathBuf::from(non_default_path),
+        Err(env::VarError::NotPresent) => {
+            let xdg_dirs = xdg::BaseDirectories::with_prefix("til").unwrap();
+            xdg_dirs.place_data_file("data.sqlite3").unwrap()
+        }
+        Err(env::VarError::NotUnicode(_)) => panic!("TIL_FILE is not valid unicode"),
+    };
+
+    let data_file_str = data_file_path_buf.to_str().unwrap();
     let connection = SqliteConnection::establish(&data_file_str).unwrap();
 
     // TODO: log this to a file instead of stdout
